@@ -124,8 +124,6 @@ void checkForMove(){
 }
 
 task main(){
-	//FIXME: Do we need this here?
-	SensorType[S4] = sensorSONAR;
 	while(true){
 		//This checks if it should move or not.
 		checkForMove();
