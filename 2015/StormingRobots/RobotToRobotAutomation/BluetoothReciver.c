@@ -17,8 +17,6 @@ const int turnLeft = 1;
 
 const int moveForward = 5;
 const int moveBackward = 2;
-//FIXME: Do we need this semicolon here?
-;
 const int useClaw = 8;
 
 const int stopMoving = 0;
