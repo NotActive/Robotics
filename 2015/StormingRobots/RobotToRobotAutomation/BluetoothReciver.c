@@ -6,7 +6,7 @@
 #pragma config(Motor,  motorC,          rightMotor,    tmotorNXT, PIDControl, driveRight, encoder)
 
 // FIXME: fix names: spelling and unreadable variable names
-int clawm = motorA;
+int claw = motorA;
 int lm = motorB;
 int rm = motorC;
 
@@ -38,9 +38,9 @@ bool detectsWall(){
 
 //this is where it configures the move functions
 void moveClaw(){
-	motor[clawm] = 100;
+	motor[claw] = 100;
 	wait1Msec(250);
-	motor[clawm] = -100;
+	motor[claw] = -100;
 	wait1Msec(300);
 }
 
@@ -87,7 +87,7 @@ void stopAll(){
 	stopF();
 	stopLeft();
 	stopRight();
-	motor[clawm] = 0;
+	motor[claw] = 0;
 }
 
 //TODO: Find out what this is
