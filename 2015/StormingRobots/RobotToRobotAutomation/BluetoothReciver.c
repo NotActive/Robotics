@@ -9,16 +9,15 @@ int claw = motorA;
 int lm = motorB;
 int rm = motorC;
 
-// FIXME: What is our naming convention for contstants!!!!!
 //this is how the robot moves. 4 means right touch sensor is pressed, 1 is left, etc, etc
-const int turnRight = 4;
-const int turnLeft = 1;
+const int TurnRight = 4;
+const int TurnLeft = 1;
 
-const int moveForward = 5;
-const int moveBackward = 2;
-const int useClaw = 8;
+const int MoveForward = 5;
+const int MoveBackward = 2;
+const int UseClaw = 8;
 
-const int stopMoving = 0;
+const int StopMoving = 0;
 
 //this is where it says if it detects wall
 //FIXME: Change function to somthing more readable
@@ -99,22 +98,22 @@ void checkForMove(){
 		cCmdMessageRead(data, 1, mailbox19);
 
 		switch(data[0]){
-		case turnRight:
+		case TurnRight:
 			moveRight();
 			break;
-		case turnLeft:
+		case TurnLeft:
 			moveLeft();
 			break;
-		case moveForward:
+		case MoveForward:
 			moveF();
 			break;
-		case moveBackward:
+		case MoveBackward:
 			moveBack();
 			break;
-		case useClaw:
+		case UseClaw:
 			moveClaw();
 			break;
-		case stopMoving:
+		case StopMoving:
 			stopAll();
 			break;
 		default:
