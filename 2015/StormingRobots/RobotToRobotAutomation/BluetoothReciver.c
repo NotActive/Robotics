@@ -1,13 +1,12 @@
 //sensors and motors
 #pragma config(Sensor, S4, wallSensor, sensorSONAR)
-#pragma config(Motor,  motorA, claw, tmotorNXT, PIDControl, encoder)
+#pragma config(Motor,  motorA, Claw, tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  motorB, leftMotor, tmotorNXT, PIDControl, driveLeft, encoder)
 #pragma config(Motor,  motorC, rightMotor, tmotorNXT, PIDControl, driveRight, encoder)
 
-// FIXME: fix names: spelling and unreadable variable names
-int claw = motorA;
-int lm = motorB;
-int rm = motorC;
+int Claw = motorA;
+int Lm = motorB;
+int Rm = motorC;
 
 //this is how the robot moves. 4 means right touch sensor is pressed, 1 is left, etc, etc
 const int TurnRight = 4;
@@ -34,48 +33,48 @@ bool detectsWall(){
 
 //this is where it configures the move functions
 void moveClaw(){
-	motor[claw] = 100;
+	motor[Claw] = 100;
 	wait1Msec(250);
-	motor[claw] = -100;
+	motor[Claw] = -100;
 	wait1Msec(300);
 }
 
 void moveLeft(){
-	motor[lm] = 100;
-	motor[rm] = -100;
+	motor[Lm] = 100;
+	motor[Rm] = -100;
 }
 
 void moveRight(){
-	motor[rm] = 100;
-	motor[lm] = -100;
+	motor[Rm] = 100;
+	motor[Lm] = -100;
 }
 
 void stopLeft(){
-	motor[lm] = 0;
+	motor[Lm] = 0;
 }
 
 void stopRight(){
-	motor[rm] = 0;
+	motor[Rm] = 0;
 }
 
 void moveF(){
-	motor[lm] = 100;
-	motor[rm] = 100;
+	motor[Lm] = 100;
+	motor[Rm] = 100;
 }
 
 void stopF(){
-	motor[lm] = 0;
-	motor[rm] = 0;
+	motor[Lm] = 0;
+	motor[Rm] = 0;
 }
 
 void moveBack(){
-	motor[lm] = -100;
-	motor[rm] = -100;
+	motor[Lm] = -100;
+	motor[Rm] = -100;
 }
 
 void stopBack(){
-	motor[lm] = 0;
-	motor[rm] = 0;
+	motor[Lm] = 0;
+	motor[Rm] = 0;
 }
 
 void stopAll(){
@@ -83,11 +82,11 @@ void stopAll(){
 	stopF();
 	stopLeft();
 	stopRight();
-	motor[claw] = 0;
+	motor[Claw] = 0;
 }
 
 //TODO: Find out what this is
-void checkForMove(){
+void checkFoRmove(){
 	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox19));
 
 	// If message size is > 0, there is a message
@@ -124,9 +123,10 @@ void checkForMove(){
 }
 
 task main(){
+
 	while(true){
 		//This checks if it should move or not.
-		checkForMove();
+		checkFoRmove();
 		//if it detects the wall, send data.
 		if(detectsWall()){
 			// FIXME: Create a constant (same as in controller, see comment there)
