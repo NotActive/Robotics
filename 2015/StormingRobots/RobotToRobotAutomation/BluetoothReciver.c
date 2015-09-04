@@ -1,9 +1,8 @@
 //sensors and motors
-// FIXME: Fix formatting!!! Please!!!
-#pragma config(Sensor, S4,     wallSensor,     sensorSONAR)
-#pragma config(Motor,  motorA,          claw,          tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  motorB,          leftMotor,     tmotorNXT, PIDControl, driveLeft, encoder)
-#pragma config(Motor,  motorC,          rightMotor,    tmotorNXT, PIDControl, driveRight, encoder)
+#pragma config(Sensor, S4, wallSensor, sensorSONAR)
+#pragma config(Motor,  motorA, claw, tmotorNXT, PIDControl, encoder)
+#pragma config(Motor,  motorB, leftMotor, tmotorNXT, PIDControl, driveLeft, encoder)
+#pragma config(Motor,  motorC, rightMotor, tmotorNXT, PIDControl, driveRight, encoder)
 
 // FIXME: fix names: spelling and unreadable variable names
 int claw = motorA;
