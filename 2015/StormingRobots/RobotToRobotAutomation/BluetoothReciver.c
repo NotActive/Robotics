@@ -77,8 +77,7 @@ void stopAll(){
 	motor[Claw] = 0;
 }
 
-//TODO: Find out what this is
-void checkFoRmove(){
+void CheckForMove(){
 	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox19));
 
 	// If message size is > 0, there is a message
@@ -119,7 +118,7 @@ task main(){
 
 	while(true){
 		//This checks if it should move or not.
-		checkFoRmove();
+		CheckForMove();
 		//if it detects the wall, send data.
 		if(SeeWall()){
 			// FIXME: Create a constant (same as in controller, see comment there)
