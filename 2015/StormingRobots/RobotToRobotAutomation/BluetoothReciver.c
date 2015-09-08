@@ -15,8 +15,6 @@ const int StopMoving = 0;
 
 //this is where it says if it detects wall
 bool SeeWall(){
-	//TODO: Find out why whenever I use sonor sensor by name an error pops up
-	// FIXME: use sonar sensor by name
 	int SonarSensorValue = SensorValue[wallSensor];
 	if(SonarSensorValue <= 25){
 		return true;
