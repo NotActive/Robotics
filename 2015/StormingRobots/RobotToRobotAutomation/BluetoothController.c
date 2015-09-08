@@ -2,11 +2,12 @@
 // S1 - left sensor: go left
 // S2 - right sensor: go right
 // both pressed: go forward
-#pragma config(Sensor, S1, left,  sensorTouch)
-#pragma config(Sensor, S2, right, sensorTouch)
+
+int left = S1;
+int right = S2;
 
 int getBitwiseControls(){
-	int bo = SensorValue[S1] << 2;
+	int bo = SensorValue[left] << 2;
 	int mo;
 
 	int bt;
@@ -32,7 +33,7 @@ int getBitwiseControls(){
 		}else{
 		br = 0 << 3;
 	}
-	int bth = SensorValue[S2] << 0;
+	int bth = SensorValue[right] << 0;
 	int mth;
 
 	return (bo | bt | bth | bl | br);
@@ -67,9 +68,9 @@ void checkForWall(){
 }
 
 task main(){
-	// FIXME: Do we need this here? Test and remove if non needed
-	// SensorType[S1] = sensorTouch;
-	// SensorType[S2] = sensorTouch;
+
+	SensorType[left] = sensorTouch;
+	SensorType[right] = sensorTouch;
 	while(true){
 		writeData();
 		checkForWall();
