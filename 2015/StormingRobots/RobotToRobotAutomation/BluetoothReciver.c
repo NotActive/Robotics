@@ -1,9 +1,4 @@
-//sensors and motors
-#pragma config(Sensor, S4, wallSensor, sensorSONAR)
-#pragma config(Motor,  motorA, Claw, tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  motorB, leftMotor, tmotorNXT, PIDControl, driveLeft, encoder)
-#pragma config(Motor,  motorC, rightMotor, tmotorNXT, PIDControl, driveRight, encoder)
-
+int wallSensor = S4;
 int Claw = motorA;
 int Lm = motorB;
 int Rm = motorC;
@@ -22,7 +17,7 @@ const int StopMoving = 0;
 bool SeeWall(){
 	//TODO: Find out why whenever I use sonor sensor by name an error pops up
 	// FIXME: use sonar sensor by name
-	int SonarSensorValue = SensorValue[S4];
+	int SonarSensorValue = SensorValue[wallSensor];
 	if(SonarSensorValue <= 25){
 		return true;
 		}else{
@@ -122,6 +117,7 @@ void checkFoRmove(){
 }
 
 task main(){
+	SensorType[wallSensor] = sensorSONAR;
 
 	while(true){
 		//This checks if it should move or not.
