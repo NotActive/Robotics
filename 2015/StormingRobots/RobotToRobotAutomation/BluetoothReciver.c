@@ -19,8 +19,7 @@ const int UseClaw = 8;
 const int StopMoving = 0;
 
 //this is where it says if it detects wall
-//FIXME: Change function to somthing more readable
-bool detectsWall(){
+bool SeeWall(){
 	//TODO: Find out why whenever I use sonor sensor by name an error pops up
 	// FIXME: use sonar sensor by name
 	int SonarSensorValue = SensorValue[S4];
@@ -128,7 +127,7 @@ task main(){
 		//This checks if it should move or not.
 		checkFoRmove();
 		//if it detects the wall, send data.
-		if(detectsWall()){
+		if(SeeWall()){
 			// FIXME: Create a constant (same as in controller, see comment there)
 			ubyte data[1];
 			data[0] = 1;
