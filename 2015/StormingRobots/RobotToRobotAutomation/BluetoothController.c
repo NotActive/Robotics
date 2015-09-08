@@ -5,9 +5,6 @@
 #pragma config(Sensor, S1, left,  sensorTouch)
 #pragma config(Sensor, S2, right, sensorTouch)
 
-// FIXME: Doesn't seem required, test and remove
-//#include "Accelerometer.h"
-
 int getBitwiseControls(){
 	int bo = SensorValue[S1] << 2;
 	int mo;
