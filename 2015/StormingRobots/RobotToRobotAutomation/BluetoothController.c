@@ -2,6 +2,7 @@
 // S1 - left sensor: go left
 // S2 - right sensor: go right
 // both pressed: go forward
+const TMailboxIDs mailbox = mailbox19;
 
 int left = S1;
 int right = S2;
@@ -45,16 +46,16 @@ void writeData(){
 	// TODO: Figure out why are we using mailbox19? Try using default or mailbox1
 	// FIXME: Can we create a constant for mailbox?
 	// Send user input to bluetooth receiver
-	cCmdMessageWriteToBluetooth(data, 1, mailbox19);
+	cCmdMessageWriteToBluetooth(data, 1, mailbox);
 }
 
 // Checks for wall. If the ultrasonic sensor gets close to the wall, it will display a messege on the screen.
 void checkForWall(){
 	ubyte data[1];
 	// Do we have a message?
-	if(cCmdMessageGetSize(mailbox19) > 0){
+	if(cCmdMessageGetSize(mailbox) > 0){
 		// We do, let's read it
-		cCmdMessageRead(data, 1, mailbox19);
+		cCmdMessageRead(data, 1, mailbox);
 		// FIXME: Create a constant for "1", which means robot is close to the wall
 		// Print a warning messge
 		if(data[0] == 1){
