@@ -1,8 +1,10 @@
+#include "BluetoothCommon.h"
+
 // Creates sensors
 // S1 - left sensor: go left
 // S2 - right sensor: go right
 // both pressed: go forward
-const TMailboxIDs mailbox = mailbox19;
+
 
 int left = S1;
 int right = S2;

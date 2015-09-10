@@ -1,3 +1,5 @@
+#include "BluetoothCommon.h"
+
 int wallSensor = S4;
 int Claw = motorA;
 int Lm = motorB;
@@ -78,14 +80,14 @@ void stopAll(){
 }
 
 void CheckForMove(){
-	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox19));
+	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox));
 
 	// If message size is > 0, there is a message
-	if (cCmdMessageGetSize(mailbox19)>0)
+	if (cCmdMessageGetSize(mailbox)>0)
 	{
 		// Declare an array of size 1, which contains unsighed bytes
 		ubyte data[1];
-		cCmdMessageRead(data, 1, mailbox19);
+		cCmdMessageRead(data, 1, mailbox);
 
 		switch(data[0]){
 		case TurnRight:
@@ -124,7 +126,7 @@ task main(){
 			// FIXME: Create a constant (same as in controller, see comment there)
 			ubyte data[1];
 			data[0] = 1;
-			cCmdMessageWriteToBluetooth(data, 1, mailbox19);
+			cCmdMessageWriteToBluetooth(data, 1, mailbox);
 		}
 	}
 }
