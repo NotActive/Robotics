@@ -61,11 +61,8 @@ void checkForWall(){
 		// FIXME: Create a constant for "1", which means robot is close to the wall
 		// Print a warning messge
 		if(data[0] == 1){
-			nxtDisplayTextLine(0, "WARNING:");
-			nxtDisplayTextLine(2, "Robot is very");
-			nxtDisplayTextLine(3, "close to the wall.");
-			nxtDisplayTextLine(4, "I suggest you");
-			nxtDisplayTextLine(5, "TURN AROUND!!!");
+			nxtDisplayTextLine(0, "    WARNING:");
+			nxtDisplayTextLine(2, "   OBJECT SEEN");
 		}
 	}
 }
