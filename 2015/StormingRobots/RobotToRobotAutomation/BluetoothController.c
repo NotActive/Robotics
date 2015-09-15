@@ -44,23 +44,22 @@ int getBitwiseControls(){
 
 void writeData(){
 	// Get user input, i.e., which sensor(s) is pressed
-	ubyte data[1] = getBitwiseControls();
+	ubyte data[MessegeArraySize] = getBitwiseControls();
 	// TODO: Figure out why are we using mailbox19? Try using default or mailbox1
 	// FIXME: Can we create a constant for mailbox?
 	// Send user input to bluetooth receiver
-	cCmdMessageWriteToBluetooth(data, 1, mailbox);
+	cCmdMessageWriteToBluetooth(data, MessegeArraySize, mailbox);
 }
 
 // Checks for wall. If the ultrasonic sensor gets close to the wall, it will display a messege on the screen.
 void checkForWall(){
-	ubyte data[1];
+	ubyte data[MessegeArraySize];
 	// Do we have a message?
 	if(cCmdMessageGetSize(mailbox) > 0){
 		// We do, let's read it
-		cCmdMessageRead(data, 1, mailbox);
-		// FIXME: Create a constant for "1", which means robot is close to the wall
+		cCmdMessageRead(data, MessegeArraySize, mailbox);
 		// Print a warning messge
-		if(data[0] == 1){
+		if(data[0] == WallDetected){
 			nxtDisplayTextLine(0, "    WARNING:");
 			nxtDisplayTextLine(2, "   OBJECT SEEN");
 		}

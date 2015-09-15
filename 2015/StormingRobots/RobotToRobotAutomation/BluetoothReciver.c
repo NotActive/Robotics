@@ -16,7 +16,7 @@ const int UseShooter = 8;
 const int StopMoving = 0;
 
 //this is where it says if it detects wall
-bool SeeWall(){
+bool DetectWall(){
 	int SonarSensorValue = SensorValue[wallSensor];
 	if(SonarSensorValue <= 25){
 		return true;
@@ -83,8 +83,8 @@ void CheckForMove(){
 	if (cCmdMessageGetSize(mailbox)>0)
 	{
 		// Declare an array of size 1, which contains unsighed bytes
-		ubyte data[1];
-		cCmdMessageRead(data, 1, mailbox);
+		ubyte data[MessegeArraySize];
+		cCmdMessageRead(data, MessegeArraySize, mailbox);
 
 		switch(data[0]){
 		case TurnRight:
@@ -119,11 +119,10 @@ task main(){
 		//This checks if it should move or not.
 		CheckForMove();
 		//if it detects the wall, send data.
-		if(SeeWall()){
-			// FIXME: Create a constant (same as in controller, see comment there)
-			ubyte data[1];
-			data[0] = 1;
-			cCmdMessageWriteToBluetooth(data, 1, mailbox);
+		if(DetectWall()){
+			ubyte data[MessegeArraySize];
+			data[0] = WallDetected;
+			cCmdMessageWriteToBluetooth(data, MessegeArraySize, mailbox);
 		}
 	}
 }
