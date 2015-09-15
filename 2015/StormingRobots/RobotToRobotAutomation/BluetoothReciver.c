@@ -1,7 +1,7 @@
 #include "BluetoothCommon.h"
 
 int wallSensor = S4;
-int Claw = motorA;
+int Shooter = motorA;
 int Lm = motorB;
 int Rm = motorC;
 
@@ -11,7 +11,7 @@ const int TurnLeft = 1;
 
 const int MoveForward = 5;
 const int MoveBackward = 2;
-const int UseClaw = 8;
+const int UseShooter = 8;
 
 const int StopMoving = 0;
 
@@ -26,11 +26,8 @@ bool SeeWall(){
 }
 
 //this is where it configures the move functions
-void moveClaw(){
-	motor[Claw] = 100;
-	wait1Msec(250);
-	motor[Claw] = -100;
-	wait1Msec(300);
+void moveShooter(){
+	motor[Shooter] = 100;
 }
 
 void moveLeft(){
@@ -76,7 +73,7 @@ void stopAll(){
 	stopF();
 	stopLeft();
 	stopRight();
-	motor[Claw] = 0;
+	motor[Shooter] = 0;
 }
 
 void CheckForMove(){
@@ -102,8 +99,8 @@ void CheckForMove(){
 		case MoveBackward:
 			moveBack();
 			break;
-		case UseClaw:
-			moveClaw();
+		case UseShooter:
+			moveShooter();
 			break;
 		case StopMoving:
 			stopAll();
