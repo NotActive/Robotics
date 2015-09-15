@@ -1,15 +1,16 @@
+#include "BluetoothCommon.h"
+
 // Creates sensors
 // S1 - left sensor: go left
 // S2 - right sensor: go right
 // both pressed: go forward
-#pragma config(Sensor, S1, left,  sensorTouch)
-#pragma config(Sensor, S2, right, sensorTouch)
 
-// FIXME: Doesn't seem required, test and remove
-//#include "Accelerometer.h"
+
+int left = S1;
+int right = S2;
 
 int getBitwiseControls(){
-	int bo = SensorValue[S1] << 2;
+	int bo = SensorValue[left] << 2;
 	int mo;
 
 	int bt;
@@ -35,7 +36,7 @@ int getBitwiseControls(){
 		}else{
 		br = 0 << 3;
 	}
-	int bth = SensorValue[S2] << 0;
+	int bth = SensorValue[right] << 0;
 	int mth;
 
 	return (bo | bt | bth | bl | br);
@@ -43,36 +44,32 @@ int getBitwiseControls(){
 
 void writeData(){
 	// Get user input, i.e., which sensor(s) is pressed
-	ubyte data[1] = getBitwiseControls();
+	ubyte data[MessegeArraySize] = getBitwiseControls();
 	// TODO: Figure out why are we using mailbox19? Try using default or mailbox1
 	// FIXME: Can we create a constant for mailbox?
 	// Send user input to bluetooth receiver
-	cCmdMessageWriteToBluetooth(data, 1, mailbox19);
+	cCmdMessageWriteToBluetooth(data, MessegeArraySize, mailbox);
 }
 
 // Checks for wall. If the ultrasonic sensor gets close to the wall, it will display a messege on the screen.
 void checkForWall(){
-	ubyte data[1];
+	ubyte data[MessegeArraySize];
 	// Do we have a message?
-	if(cCmdMessageGetSize(mailbox19) > 0){
+	if(cCmdMessageGetSize(mailbox) > 0){
 		// We do, let's read it
-		cCmdMessageRead(data, 1, mailbox19);
-		// FIXME: Create a constant for "1", which means robot is close to the wall
+		cCmdMessageRead(data, MessegeArraySize, mailbox);
 		// Print a warning messge
-		if(data[0] == 1){
-			nxtDisplayTextLine(0, "WARNING:");
-			nxtDisplayTextLine(2, "Robot is very");
-			nxtDisplayTextLine(3, "close to the wall.");
-			nxtDisplayTextLine(4, "I suggest you");
-			nxtDisplayTextLine(5, "TURN AROUND!!!");
+		if(data[0] == WallDetected){
+			nxtDisplayTextLine(0, "    WARNING:");
+			nxtDisplayTextLine(2, "   OBJECT SEEN");
 		}
 	}
 }
 
 task main(){
-	// FIXME: Do we need this here? Test and remove if non needed
-	// SensorType[S1] = sensorTouch;
-	// SensorType[S2] = sensorTouch;
+
+	SensorType[left] = sensorTouch;
+	SensorType[right] = sensorTouch;
 	while(true){
 		writeData();
 		checkForWall();
