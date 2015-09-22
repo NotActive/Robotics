@@ -1,14 +1,10 @@
-#pragma config(Sensor, S4,     wallSensor,     sensorSONAR)
-#pragma config(Motor,  motorA,          claw,          tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  motorB,          leftMotor,     tmotorNXT, PIDControl, driveLeft, encoder)
-#pragma config(Motor,  motorC,          rightMotor,    tmotorNXT, PIDControl, driveRight, encoder)
+int UltrasonicSensor = S4;
+int Shooter = motorA;
+int LeftMotor = motorB;
+int RightMotor = motorC;
 
-int clawm = motorA;
-int lm = motorB;
-int rm = motorC;
-
-bool detectsWall(){
-	int v = SensorValue[S4];
+bool DetectsWall(){
+	int v = SensorValue[UltrasonicSensor];
 	if(v <= 25){
 		return true;
 	}else{
@@ -16,14 +12,12 @@ bool detectsWall(){
 	}
 }
 
-void moveClaw(){
-	motor[clawm] = 100;
-	wait1Msec(250);
-	motor[clawm] = -100;
-	wait1Msec(300);
+//FIXME: Fix name
+void Shoot(){
+	motor[Shooter] = 100;
 }
 
-void checkForMove(){
+void checkFoRightMotorove(){
 	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox19));
 
 	if (cCmdMessageGetSize(mailbox19)>0)
@@ -39,24 +33,21 @@ void checkForMove(){
 		data[3] = (byte) udata[3];
 
 		if(data[0] == 1){
-			moveClaw();
+			Shoot();
 		}
 
-		nxtDisplayTextLine(3, "%d %d %d %d", data[0], data[1], data[2], data[3]);
-		nxtDisplayTextLine(1, "%d", data[0]);
-
-		motor[leftMotor] = (-data[1]) + data[2];
-		motor[rightMotor] = (-data[1]) - data[3];
+		motor[LeftMotor] = (-data[1]) + data[2];
+		motor[RightMotor] = (-data[1]) - data[3];
 
 		nxtDisplayTextLine(5, "%d    %d", ((-data[1]) + data[2]), ((-data[1]) - data[3]));
 	}
 }
 
 task main(){
-	SensorType[S4] = sensorSONAR;
+	SensorType[UltrasonicSensor] = sensorSONAR;
 	while(true){
-		checkForMove();
-		if(detectsWall()){
+		checkFoRightMotorove();
+		if(DetectsWall()){
 			ubyte data[1];
 			data[0] = 1;
 			cCmdMessageWriteToBluetooth(data, 1, mailbox19);
