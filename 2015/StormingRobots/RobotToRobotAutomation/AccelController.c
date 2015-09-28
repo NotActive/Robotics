@@ -2,6 +2,7 @@
 #pragma config(Sensor, S2,     right,          sensorTouch)
 
 #include "Accelerometer.h"
+#include "AccelCommon.h"
 
 const tSensors Accel = S4;
 
@@ -91,7 +92,7 @@ int getRight(int power){
 }
 
 void writeData(){
-	ubyte data[4];
+	ubyte data[MessageArraySize];
 
 	data[0] = getClaw();
 	data[1] = getForwardPower();
@@ -100,13 +101,13 @@ void writeData(){
 
 	//nxtDisplayTextLine(1, "%d %d %d %d", data[0], data[1], data[2], data[3]);
 
-	cCmdMessageWriteToBluetooth(data, 4, mailbox19);
+	cCmdMessageWriteToBluetooth(data, MessageArraySize, mailbox);
 }
 
 void checkForWall(){
 	ubyte data[1];
-	if(cCmdMessageGetSize(mailbox19) > 0){
-		cCmdMessageRead(data, 1, mailbox19);
+	if(cCmdMessageGetSize(mailbox) > 0){
+		cCmdMessageRead(data, 1, mailbox);
 		if(data[0] == 1){
 			nxtDisplayTextLine(0, "WARNING:");
 			nxtDisplayTextLine(2, "Robot is very");

@@ -1,9 +1,11 @@
-int UltrasonicSensor = S4;
-int Shooter = motorA;
-int LeftMotor = motorB;
-int RightMotor = motorC;
+const int UltrasonicSensor = S4;
+const int Shooter = motorA;
+const int LeftMotor = motorB;
+const int RightMotor = motorC;
 
-bool DetectsWall(){
+#include "AccelCommon.h"
+
+bool DetectWall(){
 	int v = SensorValue[UltrasonicSensor];
 	if(v <= 25){
 		return true;
@@ -18,14 +20,14 @@ void Shoot(){
 }
 
 void checkFoRightMotorove(){
-	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox19));
+	nxtDisplayTextLine(2,"%d",cCmdMessageGetSize(mailbox));
 
-	if (cCmdMessageGetSize(mailbox19)>0)
+	if (cCmdMessageGetSize(mailbox)>0)
 	{
-		ubyte udata[4];
-		cCmdMessageRead(udata, 4, mailbox19);
+		ubyte udata[MessageArraySize];
+		cCmdMessageRead(udata, MessageArraySize, mailbox);
 
-		byte data[4];
+		byte data[MessageArraySize];
 
 		data[0] = (byte) udata[0];
 		data[1] = (byte) udata[1];
@@ -47,10 +49,10 @@ task main(){
 	SensorType[UltrasonicSensor] = sensorSONAR;
 	while(true){
 		checkFoRightMotorove();
-		if(DetectsWall()){
+		if(DetectWall()){
 			ubyte data[1];
 			data[0] = 1;
-			cCmdMessageWriteToBluetooth(data, 1, mailbox19);
+			cCmdMessageWriteToBluetooth(data, 1, mailbox);
 		}
 	}
 }
