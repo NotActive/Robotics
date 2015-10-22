@@ -2,5 +2,5 @@
 
 task main()
 {
-GoInASquare();
+	GoInASquare();
 }
