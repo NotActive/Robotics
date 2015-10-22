@@ -2,5 +2,5 @@
 
 task main()
 {
-    GoForward();
+GoInASquare();
 }

@@ -67,6 +67,17 @@ void TurnRight()
 	motor[Rm] = 0;
 }
 
+void GoInASquare()
+{
+	int i = 0;
+	while(i<4)
+	{
+		GoForward();
+		TurnLeft();
+		i++;
+	}
+}
+
 //void GoForward(float Dist)
 //{
 //	MotorEncoderReset();
