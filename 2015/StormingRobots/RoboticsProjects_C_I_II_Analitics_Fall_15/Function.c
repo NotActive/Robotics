@@ -23,47 +23,85 @@ void GoForward()
 {
 	MotorEncoderReset();
 
-	if(nMotorEncoder[motorB]>Dist){
+	while(nMotorEncoder[motorB]>Dist){
 		motor[motorB] = Speed;
 		motor[motorC] = Speed;
 	}
+	motor[Lm] = 0;
+	motor[Rm] = 0;
 }
 
-		//void GoForward(float Dist)
-		//{
-		//	MotorEncoderReset();
-		//	int total = Dist * EncPerCm;
-		//	setMotorTarget(Lm, total, Speed);
-		//	setMotorTarget(Rm, total, Speed);
-		//	waitUntilMotorStop(Rm);
-		//	wait1Msec(100);
-		//}
+void GoBackward()
+{
+	MotorEncoderReset();
 
-		//void GoBackward(float Dist)
-		//{
-		//	MotorEncoderReset();
-		//	int total = -Dist * EncPerCm;
-		//	setMotorTarget(Lm, total, Speed);
-		//	setMotorTarget(Rm, total, Speed);
-		//	waitUntilMotorStop(Lm);
-		//}
+	while(nMotorEncoder[motorB]>Dist){
+		motor[motorB] = -Speed;
+		motor[motorC] = -Speed;
+	}
+	motor[Lm] = 0;
+	motor[Rm] = 0;
+}
 
-		//void TurnLeft(float Deg)
-		//{
-		//	MotorEncoderReset();
-		//	int total = Deg * EncPerDeg;
-		//	setMotorTarget(Lm, total, -Speed);
-		//	setMotorTarget(Rm, total, Speed);
-		//	waitUntilMotorStop(Rm);
-		//	wait1Msec(100);
-		//}
+void TurnLeft()
+{
+	MotorEncoderReset();
 
-		//void TurnRight(float Deg)
-		//{
-		//	MotorEncoderReset();
-		//	int total = Deg * EncPerDeg;
-		//	setMotorTarget(Lm, total, Speed);
-		//	setMotorTarget(Rm, total, -Speed);
-		//	waitUntilMotorStop(Rm);
-		//	wait1Msec(100);
-		//}
+	while(nMotorEncoder[motorB]>Deg){
+		motor[Lm] = -Speed;
+		motor[Rm] = Speed;
+	}
+	motor[Lm] = 0;
+	motor[Rm] = 0;
+}
+
+void TurnRight()
+{
+	MotorEncoderReset();
+
+	while(nMotorEncoder[motorB]>Deg){
+		motor[Lm] = Speed;
+		motor[Rm] = -Speed;
+	}
+	motor[Lm] = 0;
+	motor[Rm] = 0;
+}
+
+//void GoForward(float Dist)
+//{
+//	MotorEncoderReset();
+//	int total = Dist * EncPerCm;
+//	setMotorTarget(Lm, total, Speed);
+//	setMotorTarget(Rm, total, Speed);
+//	waitUntilMotorStop(Rm);
+//	wait1Msec(100);
+//}
+
+//void GoBackward(float Dist)
+//{
+//	MotorEncoderReset();
+//	int total = -Dist * EncPerCm;
+//	setMotorTarget(Lm, total, Speed);
+//	setMotorTarget(Rm, total, Speed);
+//	waitUntilMotorStop(Lm);
+//}
+
+//void TurnLeft(float Deg)
+//{
+//	MotorEncoderReset();
+//	int total = Deg * EncPerDeg;
+//	setMotorTarget(Lm, total, -Speed);
+//	setMotorTarget(Rm, total, Speed);
+//	waitUntilMotorStop(Rm);
+//	wait1Msec(100);
+//}
+
+//void TurnRight(float Deg)
+//{
+//	MotorEncoderReset();
+//	int total = Deg * EncPerDeg;
+//	setMotorTarget(Lm, total, Speed);
+//	setMotorTarget(Rm, total, -Speed);
+//	waitUntilMotorStop(Rm);
+//	wait1Msec(100);
+//}
