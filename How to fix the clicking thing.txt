@@ -1,0 +1,12 @@
+1) Go to Control panel
+2) Search up adapter
+3) Click on view network connections
+4) Right click on wifi
+5) Press desable
+6) Open device manager
+7) Click view and select show hidden devices
+8) Scroll down to Ports and open it.
+9) Right click on Bossa Program and click uninstall
+10) Reboot computer
+11) Reinstall firmware
+12) Reanable internet
