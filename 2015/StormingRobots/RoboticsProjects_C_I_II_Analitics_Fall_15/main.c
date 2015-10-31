@@ -1,6 +1,7 @@
-#include "Function.c"
+#include "Library.c"
 
 task main()
 {
-	GoInASquare();
+ float dist = 10.0;
+ float deg = 90.0;
 }
