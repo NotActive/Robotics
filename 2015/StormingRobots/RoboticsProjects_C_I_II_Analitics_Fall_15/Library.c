@@ -59,17 +59,31 @@ void TurnRight(float Deg)
 
 void TurnHalfCircle ()
 {
+	playSound(soundBeepBeep);
+ wait1Msec(3000);
 
  MotorEncoderReset();
+
+	playSound(soundBeepBeep);
+ wait1Msec(3000);
 
  float OuterCircleDiameter = InnerCircleDiameter+(RobotBase*2.0);
  float InnerMotorSpeed = (InnerCircleDiameter/OuterCircleDiameter)*Speed;
  float InnerMotorEnc = (InnerCircleDiameter/2.0)*EncPerCm;
  float OuterMotorEnc = (OuterCircleDiameter/2.0)*EncPerCm;
 
+ 	playSound(soundBeepBeep);
+ wait1Msec(3000);
+
  nMotorEncoder[motorB] = (int)OuterMotorEnc;
  nMotorEncoder[motorC] = (int)InnerMotorEnc;
 
+ 	playSound(soundBeepBeep);
+ wait1Msec(3000);
+
  motor[motorB] = (int)Speed;
  motor[motorC] = (int)InnerMotorSpeed;
+
+ 	playSound(soundException);
+ wait1Msec(3000);
 }
