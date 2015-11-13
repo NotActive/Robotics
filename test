@@ -1,0 +1,11 @@
+task main()
+{
+int i=0;
+string message;
+while (true)
+{
+	sprintf(message, "hello %d", i++);
+	writeDebugStreamLine("%s", message);
+	delay(2000);
+}
+}
