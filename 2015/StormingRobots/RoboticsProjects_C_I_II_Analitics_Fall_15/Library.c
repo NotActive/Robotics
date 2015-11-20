@@ -1,6 +1,6 @@
 #include "common.h"
 
-float speed = 50.0;
+float speed = 100.0;
 
 #define resetMotorEncoder(m)  motor[m] = 0
 
@@ -55,67 +55,30 @@ void TurnRight(float deg)
 	wait1Msec(100);
 }
 
-void MakeHalf Turn ()
+void MakeSTurn( float innerDiameter)
 {
+	int speed = 100;
 	MotorEncoderReset();
 
-	const float OuterCircleDiameter = (RobotBase*2.0)+InnerCircleDiameter;
-	const float InnerMotorSpeed = (InnerCircleDiameter/OuterCircleDiameter)*speed;
-	const float InnerMotorEnc = ((InnerCircleDiameter*PI)/2)*EncPerCm;
-	const float OuterMotorEnc = ((OuterCircleDiameter*PI)/2)*EncPerCm;
+	const float outerCircleDiameter = (RobotBase*2.0)+innerDiameter;
+	const float innerMotorSpeed = (innerDiameter/outerCircleDiameter)*speed;
+	const float innerMotorEnc = ((innerDiameter*PI)/2)*EncPerCm;
+	const float outerMotorEnc = ((outerCircleDiameter*PI)/2)*EncPerCm;
 
-	setMotorTarget(Rm, OuterMotorEnc, speed);
-	setMotorTarget(Lm, InnerMotorEnc, InnerMotorSpeed);
+	setMotorTarget(Rm, outerMotorEnc, speed);
+	setMotorTarget(Lm, innerMotorEnc, innerMotorSpeed);
 
-	while ( (nMotorRunState[Lm] != runStateIdle)  &&  (nMotorRunState[Rm] != runStateIdle) )
-		sleep(100);
+	//while    lm stop  running   &&  rm stop running
+	
+ // while ( nMotorRunState[Lm] != runStateIdle  ||  	nMotorRunState[Lm] != runStateIdle )  
+	
+	//while ( (nMotorRunState[Lm] != runStateIdle)  &&  (nMotorRunState[Rm] != runStateIdle) )
+	
+  while ( !( nMotorRunState[Lm] == runStateIdle  &&  	nMotorRunState[Rm] == runStateIdle) ) 	
+   	sleep(100);
+   displayTextLine(6, "T-I:%.2f", innerMotorEnc);
+  displayTextLine(7, "T-O:%.2f", outerMotorEnc);
+ 
 	wait1Msec(100);
+
 }
-
-//void MakeRightSTurn ()
-//{
-//	MotorEncoderReset();
-
-//	const float OuterCircleDiameter = (RobotBase*2.0)+InnerCircleDiameter;
-//	const float InnerMotorSpeed = (InnerCircleDiameter/OuterCircleDiameter)*speed;
-//	const float InnerMotorEnc = ((InnerCircleDiameter*PI)/2)*EncPerCm;
-//	const float OuterMotorEnc = ((OuterCircleDiameter*PI)/2)*EncPerCm;
-
-//	setMotorTarget(Rm, OuterMotorEnc, speed);
-//	setMotorTarget(Lm, InnerMotorEnc, InnerMotorSpeed);
-
-//	while ( (nMotorRunState[Lm] != runStateIdle)  &&  (nMotorRunState[Rm] != runStateIdle) )
-//		sleep(100);
-//	wait1Msec(100);
-
-//	setMotorTarget(Lm, OuterMotorEnc, speed);
-//	setMotorTarget(Rm, InnerMotorEnc, InnerMotorSpeed);
-
-//	while ( (nMotorRunState[Lm] != runStateIdle)  &&  (nMotorRunState[Rm] != runStateIdle) )
-//		sleep(100);
-//	wait1Msec(100);
-//}
-
-//void MakeLeftSTurn ()
-//{
-//	MotorEncoderReset();
-
-//	const float OuterCircleDiameter = (RobotBase*2.0)+InnerCircleDiameter;
-//	const float InnerMotorSpeed = (InnerCircleDiameter/OuterCircleDiameter)*speed;
-//	const float InnerMotorEnc = ((InnerCircleDiameter*PI)/2)*EncPerCm;
-//	const float OuterMotorEnc = ((OuterCircleDiameter*PI)/2)*EncPerCm;
-
-//	setMotorTarget(Lm, OuterMotorEnc, speed);
-//	setMotorTarget(Rm, InnerMotorEnc, InnerMotorSpeed);
-
-//	while ( (nMotorRunState[Lm] != runStateIdle)  &&  (nMotorRunState[Rm] != runStateIdle) )
-//		sleep(100);
-//	wait1Msec(100);
-
-//	setMotorTarget(Rm, OuterMotorEnc, speed);
-//	setMotorTarget(Lm, InnerMotorEnc, InnerMotorSpeed);
-
-//	while ( (nMotorRunState[Lm] != runStateIdle)  &&  (nMotorRunState[Rm] != runStateIdle) )
-//		sleep(100);
-//	wait1Msec(100);
-//}
