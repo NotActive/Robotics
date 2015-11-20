@@ -2,8 +2,13 @@
 
 task main()
 {
- float dist = 10.0;
- float deg = 90.0;
+	float dist = 50.0;
+	float deg = 90.0;
 
- MakeHalfTurn();
+	
+	MakeSTurn(20.0);
+
+	displayTextLine(2, "Lenc:%d", nMotorEncoder[Lm]);
+	displayTextLine(3, "Renc: %d", nMotorEncoder[Rm]);
+	delay(50000);
 }
