@@ -5,7 +5,6 @@ task main()
 	float dist = 50.0;
 	float deg = 90.0;
 
-	
 	MakeSTurn(20.0);
 
 	displayTextLine(2, "Lenc:%d", nMotorEncoder[Lm]);
