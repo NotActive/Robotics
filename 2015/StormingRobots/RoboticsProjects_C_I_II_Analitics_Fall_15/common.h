@@ -6,5 +6,5 @@ const float EncPerDeg = RobotBase*GR/Wdia;
 
 const tMotor Lm = motorB;
 const tMotor Rm = motorC;
-
-float InnerCircleDiameter = 20.0;
+const TSynchedMotors syncRmLm = synchCB;
+const TSynchedMotors syncLmRm = synchBC;
