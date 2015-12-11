@@ -6,7 +6,7 @@ turns, or left turns, avoid obstacle avoidance, etc.
 Here are the skeleton of some functions:
 
 */
-#defien LM motorA
+#define LM motorA
 #define RM motorB
 #define TIRE_DIA 5.6
 #define WHEELBASE 13.5
@@ -17,7 +17,7 @@ Here are the skeleton of some functions:
 */
 void goForward(int distInCm)
 {
-  float target=cm/(PI*TIRE_DIA/360);
+  float target=distInCm/(PI*TIRE_DIA/360);
   nMotorEncoder[LM]=0;
   nMotorEncoder[RM]=0;
 
