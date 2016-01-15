@@ -1,0 +1,29 @@
+void LineTrace()
+{
+		SensorType[S3] = sensorLightActive;
+	SensorType[S4] = sensorSONAR;
+
+	while (SensorType[S3] < silverThresh)
+	{
+		if (SensorValue[S3] >= thresh)
+		{
+			motor[Lm] = 50;
+			motor[Rm] = 0;
+		}
+		else
+		{
+			motor[Lm] = 0;
+			motor[Rm] = 50;
+		}
+		if (SensorValue[S4] <=65)
+		{
+			playSound(soundBeepBeep);
+		}
+		else
+		{
+			clearSounds();
+		}
+	}
+	motor[motorB] = 0;
+	motor[motorC] = 0;
+}
