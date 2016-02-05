@@ -1,0 +1,50 @@
+#include "Library.c"
+
+task main()
+{
+	SensorType[Light] = sensorLightActive;
+	SensorType[Ultrasonic] = sensorSONAR;
+	delay(100);
+	int i = 0;
+	int X[4];
+	int Y[4];
+
+	while(i<4)
+		//While Sonar Sensor does not see silver
+	//while (SensorType[S3] < silverThresh)
+	{
+		//Check if Ultrasonic sensor sees object
+		if (SensorValue[Ultrasonic] <=80)
+		{
+			Stop();
+			playSound(soundBeepBeep);
+			wait1Msec(2000);
+			//Set the distance. The way this works is that when the ultrasonic sensor sees the zombie, set the value of the zombie, and then check until it sees somthing greater then that distance.
+			//That means that it passed the zombie.
+			int dist = SensorValue[Ultrasonic];
+			X[i] = (nMotorEncoder[Lm]/EncPerCm);
+			Y[i] = dist;
+			//while it sees zombie line trace
+			while(SensorValue[Ultrasonic] <=dist+5)
+			{
+				LineTrace();
+			}
+			Stop();
+			wait1Msec(2000);
+			int A = X-15;
+			int B = Y-25;
+			//Displays
+			//displayTextLine(i,"x=%d y=%d", X, Y);
+			drawEllipse(A-5,B+5,A+5,B-5);
+			i++;
+		}
+		//If it sees nothing, line trace
+		else
+		{
+			LineTrace();
+		}
+	}
+	motor[Lm] = 0;
+	motor[Rm] = 0;
+	wait1Msec(5000);
+}
